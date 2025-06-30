@@ -4,9 +4,74 @@
   <meta charset="UTF-8" />
   <title>Leaderboard Controller</title>
   <style>
-    body { font-family: sans-serif; padding: 20px; background: #222; color: #fff; }
-    button { margin: 10px; padding: 10px 20px; font-size: 18px; }
-    .section { margin-bottom: 32px; }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      padding: 32px;
+      background: linear-gradient(135deg, #232526 0%, #414345 100%);
+      color: #fff;
+      min-height: 100vh;
+    }
+    .section {
+      background: rgba(40, 44, 52, 0.95);
+      border-radius: 14px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+      padding: 28px 32px 24px 32px;
+      margin-bottom: 36px;
+      max-width: 420px;
+    }
+    h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 18px;
+      letter-spacing: 1px;
+      color: #ffd700;
+      text-shadow: 0 2px 8px #0008;
+    }
+    button {
+      margin: 10px 10px 0 0;
+      padding: 10px 28px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      background: linear-gradient(90deg, #ffd700 0%, #ffb300 100%);
+      color: #222;
+      cursor: pointer;
+      box-shadow: 0 2px 8px #0004;
+      transition: background 0.2s, transform 0.1s;
+    }
+    button:hover {
+      background: linear-gradient(90deg, #ffb300 0%, #ffd700 100%);
+      transform: translateY(-2px) scale(1.04);
+    }
+    select {
+      margin-right: 12px;
+      padding: 8px 18px;
+      font-size: 1.05rem;
+      border-radius: 7px;
+      border: 1px solid #ffd700;
+      background: #232526;
+      color: #ffd700;
+      font-weight: 500;
+      outline: none;
+      box-shadow: 0 1px 4px #0002;
+      transition: border 0.2s;
+    }
+    select:focus {
+      border: 1.5px solid #ffb300;
+      background: #292b2f;
+    }
+    @media (max-width: 600px) {
+      .section {
+        max-width: 98vw;
+        padding: 18px 8vw 16px 8vw;
+      }
+      button, select {
+        width: 100%;
+        margin: 10px 0 0 0;
+        font-size: 1rem;
+      }
+    }
   </style>
 </head>
 <body>
