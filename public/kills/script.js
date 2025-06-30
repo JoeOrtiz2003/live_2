@@ -201,6 +201,7 @@ document.addEventListener("DOMContentLoaded", () => {
 const killsBC = new BroadcastChannel('kills_channel');
 killsBC.onmessage = (event) => {
   if (event.data && event.data.game) {
-    runTemplateUpdate(); // Immediately update kills display
+    moving = false; // Stop any running animation
+    runTemplateUpdate();
   }
 };
