@@ -111,7 +111,7 @@
     <select id="matchRankingDropdown">
       <option value="">Select Game</option>
     </select>
-    <button onclick="sendMatchRanking()">Set Match Ranking</button>
+    <button onclick="sendMatchRanking()">Set Match</button>
   </div>
 
   <script>
@@ -148,6 +148,7 @@
 
     const bc = new BroadcastChannel('wwcd_channel');
     const killsBC = new BroadcastChannel('kills_channel');
+    const matchRankingBC = new BroadcastChannel('match_ranking_channel');
 
     function sendWWCD() {
       const game = wwcdDropdown.value;
@@ -194,6 +195,7 @@
           body: JSON.stringify({ action: 'match_ranking', game })
         }).then(res => res.json())
           .then(data => {
+            matchRankingBC.postMessage({ game }); // Notify match ranking display immediately
             console.log(data);
           })
           .catch(console.error);

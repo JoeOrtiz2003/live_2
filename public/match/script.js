@@ -109,3 +109,5 @@ matchRankingBC.onmessage = (event) => {
     fetchSheetData();            // Immediately fetch and update
   }
 };
+
+matchRankingBC.postMessage({ game });
