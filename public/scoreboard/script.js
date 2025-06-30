@@ -113,13 +113,14 @@ function showScoreboard() {
 
   leftRows.forEach((row, i) => {
     row.classList.remove('left-in', 'left-out');
-    row.style.opacity = 0;
+    row.style.opacity = 0; // Ensure hidden before animating in
     setTimeout(() => {
       row.classList.remove('left-out');
       row.classList.add('left-in');
-      row.style.opacity = 1;
+      // Do NOT set opacity here, let CSS handle it
       row.addEventListener('animationend', function handler() {
         row.classList.remove('left-in');
+        row.style.opacity = 1; // Ensure visible after animation
         row.removeEventListener('animationend', handler);
       });
     }, i * 80);
@@ -127,13 +128,14 @@ function showScoreboard() {
 
   rightRows.forEach((row, i) => {
     row.classList.remove('right-in', 'right-out');
-    row.style.opacity = 0;
+    row.style.opacity = 0; // Ensure hidden before animating in
     setTimeout(() => {
       row.classList.remove('right-out');
       row.classList.add('right-in');
-      row.style.opacity = 1;
+      // Do NOT set opacity here, let CSS handle it
       row.addEventListener('animationend', function handler() {
         row.classList.remove('right-in');
+        row.style.opacity = 1; // Ensure visible after animation
         row.removeEventListener('animationend', handler);
       });
     }, i * 80);
