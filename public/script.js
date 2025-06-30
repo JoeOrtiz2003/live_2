@@ -22,10 +22,6 @@ function animateColumns(direction) {
   const all = [header, ...rows, lower].filter(Boolean);
   const mainDiv = document.getElementById("mainDiv");
 
-  let indices = direction === "show"
-    ? [...all.keys()]
-    : [...all.keys()].reverse();
-
   // For "show", hide all before animating in
   if (direction === "show") {
     all.forEach(el => {
@@ -36,42 +32,38 @@ function animateColumns(direction) {
     mainDiv.style.overflow = "";
   }
 
-  function animateNext(i) {
-    if (i >= indices.length) {
-      if (direction === "hide") {
-        mainDiv.style.height = "0";
-        mainDiv.style.overflow = "hidden";
-      }
-      return;
-    }
-    const el = all[indices[i]];
+  all.forEach((el, i) => {
     el.classList.remove('stagger-animate-in', 'stagger-animate-out');
-    el.style.animationDelay = "0ms"; // No delay
+    el.style.animationDelay = "0ms";
 
-    if (direction === "show") {
-      el.style.visibility = "visible";
-      el.classList.add('stagger-animate-in');
-      el.addEventListener('animationend', function handler() {
-        el.classList.remove('stagger-animate-in');
-        el.style.opacity = 1;
-        el.style.animationDelay = "0ms";
-        el.removeEventListener('animationend', handler);
-        animateNext(i + 1);
-      });
-    } else {
-      el.style.visibility = "visible";
-      el.classList.add('stagger-animate-out');
-      el.addEventListener('animationend', function handler() {
-        el.classList.remove('stagger-animate-out');
-        el.style.opacity = 0;
-        el.style.visibility = "hidden";
-        el.style.animationDelay = "0ms";
-        el.removeEventListener('animationend', handler);
-        animateNext(i + 1);
-      });
-    }
-  }
-  animateNext(0);
+    setTimeout(() => {
+      if (direction === "show") {
+        el.style.visibility = "visible";
+        el.classList.add('stagger-animate-in');
+        el.addEventListener('animationend', function handler() {
+          el.classList.remove('stagger-animate-in');
+          el.style.opacity = 1;
+          el.style.animationDelay = "0ms";
+          el.removeEventListener('animationend', handler);
+        });
+      } else {
+        el.style.visibility = "visible";
+        el.classList.add('stagger-animate-out');
+        el.addEventListener('animationend', function handler() {
+          el.classList.remove('stagger-animate-out');
+          el.style.opacity = 0;
+          el.style.visibility = "hidden";
+          el.style.animationDelay = "0ms";
+          el.removeEventListener('animationend', handler);
+          // Hide mainDiv after last element
+          if (i === all.length - 1) {
+            mainDiv.style.height = "0";
+            mainDiv.style.overflow = "hidden";
+          }
+        });
+      }
+    }, i * 80); // 80ms stagger, adjust as needed
+  });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
