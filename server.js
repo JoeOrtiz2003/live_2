@@ -7,6 +7,7 @@ const app = express();
 let controlState = { action: "show", timestamp: Date.now() };
 let wwcdGame = "Game 1"; // default
 let killsGame = "Game 1"; // default
+let matchRankingGame = "Game 1"; // default
 
 app.use(cors());
 app.use(express.json());
@@ -15,7 +16,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Get current state
 app.get('/api/control', (req, res) => {
   // Always include the last selected WWCD game
-  res.json({ ...controlState, wwcdGame, killsGame });
+  res.json({ ...controlState, wwcdGame, killsGame, matchRankingGame });
 });
 
 // Set new state
@@ -30,6 +31,10 @@ app.post('/api/control', (req, res) => {
     res.json({ success: true });
   } else if (action === "kills" && game) {
     killsGame = game;
+    controlState = { action, game, timestamp: Date.now() };
+    res.json({ success: true });
+  } else if (action === "match_ranking" && game) {
+    matchRankingGame = game;
     controlState = { action, game, timestamp: Date.now() };
     res.json({ success: true });
   } else {
