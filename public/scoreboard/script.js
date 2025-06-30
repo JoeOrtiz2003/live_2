@@ -72,7 +72,7 @@ async function fetchAndDisplayData() {
 
         // After populating leftGrouping and rightGrouping
         if (lastAction === "scoreboard_hide") {
-          // Hide all rows immediately
+          // Hide all rows immediately (no animation)
           const leftRows = Array.from(document.querySelectorAll('#leftGrouping .teamBraket'));
           const rightRows = Array.from(document.querySelectorAll('#rightGrouping .teamBraket'));
           leftRows.forEach(row => {
@@ -84,6 +84,20 @@ async function fetchAndDisplayData() {
             row.classList.remove('right-in');
             row.classList.add('right-out');
             row.style.opacity = 0;
+          });
+        } else {
+          // If showing, ensure rows are visible
+          const leftRows = Array.from(document.querySelectorAll('#leftGrouping .teamBraket'));
+          const rightRows = Array.from(document.querySelectorAll('#rightGrouping .teamBraket'));
+          leftRows.forEach(row => {
+            row.classList.remove('left-out');
+            row.classList.add('left-in');
+            row.style.opacity = 1;
+          });
+          rightRows.forEach(row => {
+            row.classList.remove('right-out');
+            row.classList.add('right-in');
+            row.style.opacity = 1;
           });
         }
     } catch (error) {
