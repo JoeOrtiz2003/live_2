@@ -201,7 +201,8 @@ document.addEventListener("DOMContentLoaded", () => {
 const killsBC = new BroadcastChannel('kills_channel');
 killsBC.onmessage = (event) => {
   if (event.data && event.data.game) {
-    moving = false; // Stop any running animation
-    runTemplateUpdate();
+    // Optionally stop any running animation here if needed
+    moving = false; // If you use a moving flag for animation, stop it
+    runTemplateUpdate(); // Immediately update kills display
   }
 };
