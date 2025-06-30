@@ -85,21 +85,31 @@ function showScoreboard() {
   const rightRows = Array.from(document.querySelectorAll('#rightGrouping .teamBraket'));
 
   leftRows.forEach((row, i) => {
-    row.classList.remove('left-out');
+    row.classList.remove('left-in', 'left-out');
     row.style.opacity = 0;
     setTimeout(() => {
+      row.classList.remove('left-out');
       row.classList.add('left-in');
       row.style.opacity = 1;
-    }, i * 80); // 80ms stagger, adjust as needed
+      row.addEventListener('animationend', function handler() {
+        row.classList.remove('left-in');
+        row.removeEventListener('animationend', handler);
+      });
+    }, i * 80);
   });
 
   rightRows.forEach((row, i) => {
-    row.classList.remove('right-out');
+    row.classList.remove('right-in', 'right-out');
     row.style.opacity = 0;
     setTimeout(() => {
+      row.classList.remove('right-out');
       row.classList.add('right-in');
       row.style.opacity = 1;
-    }, i * 80); // 80ms stagger, adjust as needed
+      row.addEventListener('animationend', function handler() {
+        row.classList.remove('right-in');
+        row.removeEventListener('animationend', handler);
+      });
+    }, i * 80);
   });
 }
 
@@ -108,19 +118,29 @@ function hideScoreboard() {
   const rightRows = Array.from(document.querySelectorAll('#rightGrouping .teamBraket'));
 
   leftRows.forEach((row, i) => {
-    row.classList.remove('left-in');
+    row.classList.remove('left-in', 'left-out');
     setTimeout(() => {
+      row.classList.remove('left-in');
       row.classList.add('left-out');
-      row.style.opacity = 0;
-    }, i * 80); // 80ms stagger, adjust as needed
+      row.addEventListener('animationend', function handler() {
+        row.classList.remove('left-out');
+        row.style.opacity = 0;
+        row.removeEventListener('animationend', handler);
+      });
+    }, i * 80);
   });
 
   rightRows.forEach((row, i) => {
-    row.classList.remove('right-in');
+    row.classList.remove('right-in', 'right-out');
     setTimeout(() => {
+      row.classList.remove('right-in');
       row.classList.add('right-out');
-      row.style.opacity = 0;
-    }, i * 80); // 80ms stagger, adjust as needed
+      row.addEventListener('animationend', function handler() {
+        row.classList.remove('right-out');
+        row.style.opacity = 0;
+        row.removeEventListener('animationend', handler);
+      });
+    }, i * 80);
   });
 }
 
