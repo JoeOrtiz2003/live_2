@@ -84,8 +84,13 @@
       margin-top: 16px;
       box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
     }
+    /* Make scroll buttons match the section width */
     #scrollUpButton, #scrollDownButton {
       width: 100%;
+      max-width: 540px;      /* Match .section max-width */
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
       font-size: 1.2rem;
       padding: 8px 0;
       background: #1976d2;
