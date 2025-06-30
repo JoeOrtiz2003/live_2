@@ -6,70 +6,73 @@
   <style>
     body {
       font-family: 'Segoe UI', Arial, sans-serif;
-      padding: 32px;
+      padding: 48px;
       background: linear-gradient(135deg, #0f2027 0%, #2c5364 100%);
       color: #e0f7fa;
       min-height: 100vh;
     }
     .section {
       background: rgba(24, 40, 72, 0.97);
-      border-radius: 16px;
-      box-shadow: 0 4px 24px rgba(0,40,80,0.18);
-      padding: 28px 32px 24px 32px;
-      margin-bottom: 36px;
-      max-width: 420px;
+      border-radius: 20px;
+      box-shadow: 0 6px 32px rgba(0,40,80,0.22);
+      padding: 40px 48px 32px 48px;
+      margin-bottom: 48px;
+      max-width: 540px;
     }
     h1 {
-      font-size: 1.5rem;
-      font-weight: 700;
-      margin-bottom: 18px;
-      letter-spacing: 1px;
+      font-size: 2.1rem;
+      font-weight: 800;
+      margin-bottom: 28px;
+      letter-spacing: 1.5px;
       color: #4fd2ff;
-      text-shadow: 0 2px 8px #00334d88;
+      text-shadow: 0 3px 12px #00334d88;
     }
     button {
-      margin: 10px 10px 0 0;
-      padding: 10px 28px;
-      font-size: 1.1rem;
-      font-weight: 600;
+      margin: 16px 16px 0 0;
+      padding: 16px 40px;
+      font-size: 1.35rem;
+      font-weight: 700;
       border: none;
-      border-radius: 8px;
+      border-radius: 12px;
       background: linear-gradient(90deg, #4fd2ff 0%, #1976d2 100%);
       color: #fff;
       cursor: pointer;
-      box-shadow: 0 2px 8px #00334d44;
+      box-shadow: 0 3px 12px #00334d44;
       transition: background 0.2s, transform 0.1s;
     }
     button:hover {
       background: linear-gradient(90deg, #1976d2 0%, #4fd2ff 100%);
-      transform: translateY(-2px) scale(1.04);
+      transform: translateY(-3px) scale(1.06);
     }
     select {
-      margin-right: 12px;
-      padding: 8px 18px;
-      font-size: 1.05rem;
-      border-radius: 7px;
-      border: 1.5px solid #4fd2ff;
+      margin-right: 18px;
+      padding: 14px 28px;
+      font-size: 1.25rem;
+      border-radius: 10px;
+      border: 2px solid #4fd2ff;
       background: #183050;
       color: #4fd2ff;
-      font-weight: 500;
+      font-weight: 600;
       outline: none;
-      box-shadow: 0 1px 4px #00334d22;
+      box-shadow: 0 2px 8px #00334d22;
       transition: border 0.2s;
     }
     select:focus {
-      border: 2px solid #1976d2;
+      border: 2.5px solid #1976d2;
       background: #223a5e;
     }
-    @media (max-width: 600px) {
+    @media (max-width: 700px) {
       .section {
-        max-width: 98vw;
-        padding: 18px 8vw 16px 8vw;
+        max-width: 99vw;
+        padding: 22px 4vw 18px 4vw;
       }
       button, select {
         width: 100%;
-        margin: 10px 0 0 0;
-        font-size: 1rem;
+        margin: 16px 0 0 0;
+        font-size: 1.1rem;
+      }
+      h1 {
+        font-size: 1.4rem;
       }
     }
   </style>
