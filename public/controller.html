@@ -141,7 +141,6 @@
 
   <button id="scrollUpButton" style="margin:8px 0 4px 0;">▲ Scroll Up</button>
   <button id="scrollDownButton" style="margin:4px 0 8px 0;">▼ Scroll Down</button>
-  <div class="bracket-wrapper"></div>
 
   <script>
     // Dynamically add Game 1-15 options
@@ -178,6 +177,7 @@
     const bc = new BroadcastChannel('wwcd_channel');
     const killsBC = new BroadcastChannel('kills_channel');
     const matchRankingBC = new BroadcastChannel('match_ranking_channel');
+    const matchScrollBC = new BroadcastChannel('match_scroll_channel');
 
     function sendWWCD() {
       const game = wwcdDropdown.value;
@@ -232,6 +232,13 @@
         alert('Please select a game for Match Ranking.');
       }
     }
+
+    document.getElementById('scrollUpButton').addEventListener('click', () => {
+      matchScrollBC.postMessage({ direction: 'up' });
+    });
+    document.getElementById('scrollDownButton').addEventListener('click', () => {
+      matchScrollBC.postMessage({ direction: 'down' });
+    });
   </script>
 </body>
 </html>

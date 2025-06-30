@@ -134,3 +134,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
+
+const matchScrollBC = new BroadcastChannel('match_scroll_channel');
+matchScrollBC.onmessage = (event) => {
+  const wrapper = document.querySelector('.bracket-wrapper');
+  if (!wrapper) return;
+  if (event.data.direction === 'up') {
+    wrapper.scrollBy({ top: -550, behavior: 'smooth' });
+  } else if (event.data.direction === 'down') {
+    wrapper.scrollBy({ top: 550, behavior: 'smooth' });
+  }
+};
