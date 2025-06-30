@@ -32,7 +32,10 @@ function animateColumns(direction) {
     mainDiv.style.overflow = "";
   }
 
-  all.forEach((el, i) => {
+  // For "hide", reverse the order so animation starts from bottom to top
+  const animateOrder = direction === "hide" ? [...all].reverse() : all;
+
+  animateOrder.forEach((el, i) => {
     el.classList.remove('stagger-animate-in', 'stagger-animate-out');
     el.style.animationDelay = "0ms";
 
@@ -56,7 +59,7 @@ function animateColumns(direction) {
           el.style.animationDelay = "0ms";
           el.removeEventListener('animationend', handler);
           // Hide mainDiv after last element
-          if (i === all.length - 1) {
+          if (i === animateOrder.length - 1) {
             mainDiv.style.height = "0";
             mainDiv.style.overflow = "hidden";
           }
