@@ -14,10 +14,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Call this before fetching Google Sheets data
-  getWWCDGame();
+  async function fetchAndRender() {
+    await getWWCDGame(); // Always update sheetName before fetching data
 
-  function fetchAndRender() {
     const query = encodeURIComponent('SELECT T, W, X, Z, Y, AA, AH'); // AQ = new bg image url column
     const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tq=${query}&sheet=${sheetName}`;
 
@@ -110,5 +109,5 @@ document.addEventListener("DOMContentLoaded", () => {
   fetchAndRender();
 
   // Set interval to fetch every 10 seconds (10000 ms)
-  setInterval(fetchAndRender, 50000);
+  setInterval(fetchAndRender, 10000);
 });
