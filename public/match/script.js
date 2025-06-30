@@ -120,3 +120,17 @@ function updateSlogan() {
   const slogan = document.getElementById('slogan');
   if (slogan) slogan.textContent = sheetName;
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+  const wrapper = document.querySelector('.bracket-wrapper');
+  const scrollUpBtn = document.getElementById('scrollUpButton');
+  const scrollDownBtn = document.getElementById('scrollDownButton');
+  if (wrapper && scrollUpBtn && scrollDownBtn) {
+    scrollUpBtn.addEventListener('click', () => {
+      wrapper.scrollBy({ top: -550, behavior: 'smooth' });
+    });
+    scrollDownBtn.addEventListener('click', () => {
+      wrapper.scrollBy({ top: 550, behavior: 'smooth' });
+    });
+  }
+});

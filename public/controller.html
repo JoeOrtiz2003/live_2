@@ -75,6 +75,31 @@
         font-size: 1.4rem;
       }
     }
+    .bracket-wrapper {
+      max-height: 600px;
+      overflow-y: auto;
+      background: rgba(24, 40, 72, 0.97);
+      border-radius: 10px;
+      padding: 16px;
+      margin-top: 16px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    }
+    #scrollUpButton, #scrollDownButton {
+      width: 100%;
+      font-size: 1.2rem;
+      padding: 8px 0;
+      background: #1976d2;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      margin-bottom: 6px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    #scrollUpButton:hover, #scrollDownButton:hover {
+      background: #4fd2ff;
+      color: #183050;
+    }
   </style>
 </head>
 <body>
@@ -113,6 +138,10 @@
     </select>
     <button onclick="sendMatchRanking()">Set Match</button>
   </div>
+
+  <button id="scrollUpButton" style="margin:8px 0 4px 0;">▲ Scroll Up</button>
+  <button id="scrollDownButton" style="margin:4px 0 8px 0;">▼ Scroll Down</button>
+  <div class="bracket-wrapper"></div>
 
   <script>
     // Dynamically add Game 1-15 options
