@@ -110,4 +110,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Set interval to fetch every 10 seconds (10000 ms)
   setInterval(fetchAndRender, 10000);
+
+  const bc = new BroadcastChannel('wwcd_channel');
+  bc.onmessage = (event) => {
+    if (event.data && event.data.game) {
+      // Immediately fetch and render new data
+      fetchAndRender();
+    }
+  };
 });

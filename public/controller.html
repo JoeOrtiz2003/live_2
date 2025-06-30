@@ -50,6 +50,8 @@
         .catch(console.error);
     }
 
+    const bc = new BroadcastChannel('wwcd_channel');
+
     function sendWWCD() {
       const game = wwcdDropdown.value;
       if (game) {
@@ -58,7 +60,10 @@
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ action: 'wwcd', game })
         }).then(res => res.json())
-          .then(data => console.log(data))
+          .then(data => {
+            bc.postMessage({ game }); // Notify other tabs immediately
+            console.log(data);
+          })
           .catch(console.error);
       } else {
         alert('Please select a game for WWCD.');
