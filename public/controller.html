@@ -95,14 +95,28 @@
     <button onclick="sendWWCD()">Set WWCD</button>
   </div>
 
+  <div class="section">
+    <h1>Kills Stats</h1>
+    <select id="killsDropdown">
+      <option value="">Select Game</option>
+    </select>
+    <button onclick="sendKills()">Set Kills</button>
+  </div>
+
   <script>
     // Dynamically add Game 1-15 options
     const wwcdDropdown = document.getElementById('wwcdDropdown');
+    const killsDropdown = document.getElementById('killsDropdown');
     for (let i = 1; i <= 15; i++) {
-      const opt = document.createElement('option');
-      opt.value = `Game ${i}`;
-      opt.textContent = `Game ${i}`;
-      wwcdDropdown.appendChild(opt);
+      const optWWCD = document.createElement('option');
+      optWWCD.value = `Game ${i}`;
+      optWWCD.textContent = `Game ${i}`;
+      wwcdDropdown.appendChild(optWWCD);
+
+      const optKills = document.createElement('option');
+      optKills.value = `Game ${i}`;
+      optKills.textContent = `Game ${i}`;
+      killsDropdown.appendChild(optKills);
     }
 
     function send(action) {
@@ -132,6 +146,24 @@
           .catch(console.error);
       } else {
         alert('Please select a game for WWCD.');
+      }
+    }
+
+    function sendKills() {
+      const game = killsDropdown.value;
+      if (game) {
+        fetch('/api/control', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: 'kills', game })
+        }).then(res => res.json())
+          .then(data => {
+            // You can use BroadcastChannel here if you want instant update
+            console.log(data);
+          })
+          .catch(console.error);
+      } else {
+        alert('Please select a game for Kills Stats.');
       }
     }
   </script>
