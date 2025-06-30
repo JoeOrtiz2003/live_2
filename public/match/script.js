@@ -5,8 +5,12 @@ const query = 'SELECT V, Y, Z, AA, X, AH, W WHERE U IS NOT NULL ORDER BY AH DESC
 google.charts.load('current', { packages: ['corechart'] });
 google.charts.setOnLoadCallback(() => {
   createRankingElements(16);
+  updateSlogan(); // Set slogan on load
   fetchSheetData();
-  setInterval(fetchSheetData, 5000);
+  setInterval(() => {
+    updateSlogan(); // Keep slogan in sync if sheetName changes
+    fetchSheetData();
+  }, 5000);
 });
 
 function fetchSheetData() {
@@ -106,8 +110,13 @@ const matchRankingBC = new BroadcastChannel('match_ranking_channel');
 matchRankingBC.onmessage = (event) => {
   if (event.data && event.data.game) {
     sheetName = event.data.game; // Update to the selected game
+    updateSlogan();              // Update the slogan text
     fetchSheetData();            // Immediately fetch and update
   }
 };
 
-matchRankingBC.postMessage({ game });
+// Call this function whenever sheetName changes
+function updateSlogan() {
+  const slogan = document.getElementById('slogan');
+  if (slogan) slogan.textContent = sheetName;
+}

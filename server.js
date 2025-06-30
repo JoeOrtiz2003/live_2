@@ -43,22 +43,26 @@ app.post('/api/control', (req, res) => {
 });
 
 // Serve controller.html at /controller
-app.get('/controller', (req, res) => {
+app.get('/Controller', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'controller.html'));
 });
 
 // Serve display.html at /display
-app.get('/display', (req, res) => {
+app.get('/Display', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'display.html'));
 });
 
 // Serve scoreboard.html at /scoreboard
-app.get('/scoreboard', (req, res) => {
+app.get('/Scoreboard', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'scoreboard.html'));
 });
 
-app.get('/kills', (req, res) => {
+app.get('/Kills', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'kills.html'));
+});
+
+app.get('/Match', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'match.html'));
 });
 
 // Fallback: redirect to controller
