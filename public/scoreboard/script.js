@@ -69,6 +69,23 @@ async function fetchAndDisplayData() {
                 rightGrouping.appendChild(teamBraket); // Ranks 9 to 16
             }
         });
+
+        // After populating leftGrouping and rightGrouping
+        if (lastAction === "scoreboard_hide") {
+          // Hide all rows immediately
+          const leftRows = Array.from(document.querySelectorAll('#leftGrouping .teamBraket'));
+          const rightRows = Array.from(document.querySelectorAll('#rightGrouping .teamBraket'));
+          leftRows.forEach(row => {
+            row.classList.remove('left-in');
+            row.classList.add('left-out');
+            row.style.opacity = 0;
+          });
+          rightRows.forEach(row => {
+            row.classList.remove('right-in');
+            row.classList.add('right-out');
+            row.style.opacity = 0;
+          });
+        }
     } catch (error) {
         console.error("Error fetching data from Google Sheets:", error);
     }
