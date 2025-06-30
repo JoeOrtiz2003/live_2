@@ -52,6 +52,10 @@ app.get('/scoreboard', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'scoreboard.html'));
 });
 
+app.get('/kills', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'kills.html'));
+});
+
 // Fallback: redirect to controller
 app.get('*', (req, res) => {
   res.redirect('/controller');

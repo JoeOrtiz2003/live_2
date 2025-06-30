@@ -133,8 +133,8 @@ body {
 }
 
 .teamBraket p {
-    line-height: px;
-    font-size: 20px;
+    font-size: 18.1px;
+    margin: 0;
 }
 
 .teamBraket:nth-child(odd) {
