@@ -197,3 +197,10 @@ document.addEventListener("DOMContentLoaded", () => {
         runTemplateUpdate(); // Auto update data at set intervals
     }, AUTO_FETCH_INTERVAL);
 });
+
+const killsBC = new BroadcastChannel('kills_channel');
+killsBC.onmessage = (event) => {
+  if (event.data && event.data.game) {
+    runTemplateUpdate(); // Immediately update kills display
+  }
+};
