@@ -1,14 +1,13 @@
 :root {
   --mainWidth: min(90vw, 250px);
   --font: 'Oswald', sans-serif;
-  --ranking-title-color: black;
-  --ranking-header-color: black;
-  --ranking-header-background-color: #bfc0ff;
+  --ranking-header-color: white;
+  --ranking-header-background-color: #0e60a8;
   --ranking-element-color: white;
-  --ranking-uneven-background-color: #5b5c8e;
-  --ranking-even-background-color: #474772;
-  --alive-background-color: #ffffff;
-  --lower-background-color: #3f395f;
+  --ranking-uneven-background-color: #0a2646;
+  --ranking-even-background-color: #15417a;
+  --alive-background-color: #ffff;
+  --lower-background-color: #15417a;
   --dead-background-color: #4e4e4e;
 }
 
@@ -29,7 +28,7 @@ body {
   flex-direction: column;
   align-items: center;
   text-transform: uppercase;
-  transform: translateX(0%) translateY(115px);
+  transform: translateX(0%) translateY(150px);
   margin-right: 0;
   transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
   opacity: 1;

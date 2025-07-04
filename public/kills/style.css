@@ -2,12 +2,12 @@
 
 :root {
     --match-graph-elim-graph-color: white;
-    --match-graph-elim-graph-background-color: #737373;
-    --match-graph-damage-graph-background-color: #8b8989;
-    --match-graph-graph-wrapper-background-color: #484848;
+    --match-graph-elim-graph-background-color: #0a2646;
+    --match-graph-damage-graph-background-color: #15417a;
+    --match-graph-graph-wrapper-background-color: #0e60a8;
     --match-graph-team-color: white;
-    --match-graph-team-background-color: #5f5c5c;
-    --match-graph-team-logo-background-color: #8b8989;
+    --match-graph-team-background-color: #15417a;
+    --match-graph-team-logo-background-color: #0a2646;
     --match-graph-graph-number-color: white;
 }
 
