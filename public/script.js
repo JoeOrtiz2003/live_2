@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const mainDiv = document.getElementById("mainDiv");
   mainDiv.style.display = "flex";
 
-  createRankingElements(20);
+  createRankingElements(18);
   fetchRankingData();
   setInterval(fetchRankingData, 1000);
 });
@@ -85,7 +85,7 @@ const sheetURL = `https://docs.google.com/spreadsheets/d/${sheetID}/gviz/tq?tqx=
 
 let previousRanks = {};
 
-function createRankingElements(count = 20) {
+function createRankingElements(count = 18) {
   const wrapper = document.getElementById("rankingElementsWrapper");
   wrapper.innerHTML = "";
 
@@ -164,7 +164,7 @@ function updateRankingElements(data) {
 
     const aliveBoxes = element.querySelectorAll(".rankingElementAlive");
     aliveBoxes.forEach((box, i) => {
-      box.style.backgroundColor = i < teamData.alive ? "#ffffff" : "#4e4e4e";
+      box.style.backgroundColor = i < teamData.alive ? "#ffffff" : "#0e0d0d";
     });
 
     if (teamData.alive === 0) {

@@ -1,13 +1,13 @@
 :root {
     --table-font: MonserratSemiBold;
     --secondary-font: MonserratRegular;
-    --braket-header-color: white;
-    --braket-header-primary-color: #0e60a8;
-    --braket-header-secondary-color: #0e60a8;
+    --braket-header-color: black;
+    --braket-header-primary-color: #e6b220;
+    --braket-header-secondary-color: #e6b220;
     --braket-primary-color: white;
     --braket-secondary-color: white;
-    --braket-odd-background-color: #0a2646;
-    --braket-even-background-color: #15417a;
+    --braket-odd-background-color: #453105;
+    --braket-even-background-color: #73540a;
     --svg-color: white; /* Color Chicken */
 }
 
