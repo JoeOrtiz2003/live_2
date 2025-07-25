@@ -65,6 +65,11 @@ app.get('/Match', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'match.html'));
 });
 
+// Serve wwcd.html at /WWCD
+app.get('/WWCD', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'wwcd.html'));
+});
+
 // Fallback: redirect to controller
 app.get('*', (req, res) => {
   res.redirect('/controller');
