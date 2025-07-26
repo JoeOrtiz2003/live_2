@@ -24,7 +24,7 @@ function animateColumns(direction) {
   const mainDiv = document.getElementById("mainDiv");
 
   // For "show", hide all before animating in
-  if (direction === "show2") {
+  if (direction === "show") {
     all.forEach(el => {
       el.style.opacity = 0;
       el.style.visibility = "hidden";
@@ -34,14 +34,14 @@ function animateColumns(direction) {
   }
 
   // For "hide", reverse the order so animation starts from bottom to top
-  const animateOrder = direction === "hide2" ? [...all].reverse() : all;
+  const animateOrder = direction === "hide" ? [...all].reverse() : all;
 
   animateOrder.forEach((el, i) => {
     el.classList.remove('stagger-animate-in', 'stagger-animate-out');
     el.style.animationDelay = "0ms";
 
     setTimeout(() => {
-      if (direction === "show2") {
+      if (direction === "show") {
         el.style.visibility = "visible";
         el.classList.add('stagger-animate-in');
         el.addEventListener('animationend', function handler() {
