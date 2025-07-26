@@ -1,74 +1,3 @@
-let lastAction = null;
-
-setInterval(() => {
-  fetch("/api/control")
-    .then(res => res.json())
-    .then(command => {
-      if (command.action !== lastAction) {
-        if (command.action === "hide") {
-          animateColumns("hide");
-        } else if (command.action === "show") {
-          animateColumns("show");
-        }
-        lastAction = command.action;
-      }
-    });
-}, 1000);
-
-function animateColumns(direction) {
-  const header = document.querySelector('.rankingHeader');
-  const rows = Array.from(document.querySelectorAll('.rankingElement'));
-  const lower = document.querySelector('.lowerHeader');
-  const all = [header, ...rows, lower].filter(Boolean);
-  const mainDiv = document.getElementById("mainDiv");
-
-  // For "show", hide all before animating in
-  if (direction === "show") {
-    all.forEach(el => {
-      el.style.opacity = 0;
-      el.style.visibility = "hidden";
-    });
-    mainDiv.style.height = "";
-    mainDiv.style.overflow = "";
-  }
-
-  // For "hide", reverse the order so animation starts from bottom to top
-  const animateOrder = direction === "hide" ? [...all].reverse() : all;
-
-  animateOrder.forEach((el, i) => {
-    el.classList.remove('stagger-animate-in', 'stagger-animate-out');
-    el.style.animationDelay = "0ms";
-
-    setTimeout(() => {
-      if (direction === "show") {
-        el.style.visibility = "visible";
-        el.classList.add('stagger-animate-in');
-        el.addEventListener('animationend', function handler() {
-          el.classList.remove('stagger-animate-in');
-          el.style.opacity = 1;
-          el.style.animationDelay = "0ms";
-          el.removeEventListener('animationend', handler);
-        });
-      } else {
-        el.style.visibility = "visible";
-        el.classList.add('stagger-animate-out');
-        el.addEventListener('animationend', function handler() {
-          el.classList.remove('stagger-animate-out');
-          el.style.opacity = 0;
-          el.style.visibility = "hidden";
-          el.style.animationDelay = "0ms";
-          el.removeEventListener('animationend', handler);
-          // Hide mainDiv after last element
-          if (i === animateOrder.length - 1) {
-            mainDiv.style.height = "0";
-            mainDiv.style.overflow = "hidden";
-          }
-        });
-      }
-    }, i * 80); // 80ms stagger, adjust as needed
-  });
-}
-
 document.addEventListener("DOMContentLoaded", () => {
   const mainDiv = document.getElementById("mainDiv");
   mainDiv.style.display = "flex";
@@ -80,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 const sheetID = "1srwCRcCf_grbInfDSURVzXXRqIqxQ6_IIPG-4_gnSY8";
 const sheetName = "LIVE";
-const query = "select AZ, BA, BB, BC, BD";
+const query = "select I, J, L, M, N, K"; // Add BE for points
 const sheetURL = `https://docs.google.com/spreadsheets/d/${sheetID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(sheetName)}&tq=${encodeURIComponent(query)}`;
 
 let previousRanks = {};
@@ -108,6 +37,7 @@ function createRankingElements(count = 18) {
           <div class="rankingElementAlive"></div>
           <div class="rankingElementAlive"></div>
         </div>
+        <p class="rankingElementPoints"></p> <!-- Added PTS here -->
         <p class="rankingElementKills"></p>
       </div>
     `;
@@ -128,7 +58,8 @@ async function fetchRankingData() {
       team: row.c[1]?.v?.toString().trim() ?? "Unknown",
       elims: row.c[2]?.v ?? 0,
       logo: row.c[3]?.v ?? "https://placehold.co/22x22/000000/FFF?text=?",
-      alive: row.c[4]?.v ?? 0
+      alive: row.c[4]?.v ?? 0,
+      points: row.c[5]?.v ?? 0 // Added points
     }));
 
     updateRankingElements(rows);
@@ -161,6 +92,7 @@ function updateRankingElements(data) {
     element.querySelector(".rankingElementName").textContent = teamData.team;
     element.querySelector(".rankingElementLogo").src = teamData.logo;
     element.querySelector(".rankingElementKills").textContent = teamData.elims;
+    element.querySelector(".rankingElementPoints").textContent = teamData.points; // Set points
 
     const aliveBoxes = element.querySelectorAll(".rankingElementAlive");
     aliveBoxes.forEach((box, i) => {
@@ -175,14 +107,4 @@ function updateRankingElements(data) {
   });
 
   previousRanks = { ...newRanks };
-}
-
-function send(action) {
-  fetch('/api/control', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ action })
-  }).then(res => res.json())
-    .then(data => console.log(data))
-    .catch(console.error);
 }

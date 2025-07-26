@@ -48,7 +48,7 @@ app.get('/Controller', (req, res) => {
 });
 
 // Serve display.html at /display
-app.get('/Display', (req, res) => {
+app.get('/Ranking', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'display.html'));
 });
 
@@ -68,6 +68,11 @@ app.get('/Match', (req, res) => {
 // Serve wwcd.html at /WWCD
 app.get('/WWCD', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'wwcd.html'));
+});
+
+// Serve ranking2.html at /Ranking2
+app.get('/Ranking2', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'ranking2.html'));
 });
 
 // Fallback: redirect to controller
