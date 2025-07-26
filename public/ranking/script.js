@@ -81,7 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 const sheetID = "1srwCRcCf_grbInfDSURVzXXRqIqxQ6_IIPG-4_gnSY8";
 const sheetName = "LIVE";
-const query = "select AZ, BA, BB, BC, BD";
+const query = "select I, J, L, M, N, K";
 const sheetURL = `https://docs.google.com/spreadsheets/d/${sheetID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(sheetName)}&tq=${encodeURIComponent(query)}`;
 
 let previousRanks = {};
