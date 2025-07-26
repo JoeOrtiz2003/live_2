@@ -248,10 +248,18 @@
     }
 
     document.getElementById('scrollUpButton').addEventListener('click', () => {
-      matchScrollBC.postMessage({ direction: 'up' });
+      fetch('/api/control', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'scroll_up' })
+      });
     });
     document.getElementById('scrollDownButton').addEventListener('click', () => {
-      matchScrollBC.postMessage({ direction: 'down' });
+      fetch('/api/control', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'scroll_down' })
+      });
     });
   </script>
 </body>
