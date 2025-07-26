@@ -230,21 +230,22 @@ body {
   will-change: transform, opacity;
 }
 
-/*@keyframes slideInLeft {
-  from { transform: translateX(-100%) translateY(115px); opacity: 0; }
-  to   { transform: translateX(0%) translateY(115px); opacity: 1; }
+@keyframes slideLeft {
+  0% { transform: translateX(40px); opacity: 0.5; }
+  100% { transform: translateX(0); opacity: 1; }
 }
-@keyframes slideOutRight {
-  from { transform: translateX(0%) translateY(115px); opacity: 1; }
-  to   { transform: translateX(100%) translateY(115px); opacity: 0; }
+@keyframes slideRight {
+  0% { transform: translateX(-40px); opacity: 0.5; }
+  100% { transform: translateX(0); opacity: 1; }
 }
-
-#mainDiv.slide-in-left {
-  animation: slideInLeft 0.7s forwards;
+.slide-left {
+  animation: slideLeft 0.5s cubic-bezier(0.4,0,0.2,1);
+  will-change: transform, opacity;
 }
-#mainDiv.slide-out-right {
-  animation: slideOutRight 0.7s forwards;
-}*/
+.slide-right {
+  animation: slideRight 0.5s cubic-bezier(0.4,0,0.2,1);
+  will-change: transform, opacity;
+}
 
 @keyframes fadeSlideOutRight {
   from { transform: translateX(0); opacity: 1; }
@@ -254,13 +255,6 @@ body {
   from { transform: translateX(100%); opacity: 0; }
   to   { transform: translateX(0); opacity: 1; }
 }
-
-/*.animated-in {
-  animation: fadeSlideInLeft 0.10s ease-in-out forwards;
-}
-.animated-out {
-  animation: fadeSlideOutRight 0.10s ease-in-out forwards;
-}*/
 
 .stagger-animate-in {
   animation: fadeSlideInRight 0.20s cubic-bezier(0.4, 0, 0.2, 1) forwards;

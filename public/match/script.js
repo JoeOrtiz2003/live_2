@@ -10,7 +10,7 @@ google.charts.setOnLoadCallback(() => {
   setInterval(() => {
     updateSlogan(); // Keep slogan in sync if sheetName changes
     fetchSheetData();
-  }, 5000);
+  }, 1000);
 });
 
 function fetchSheetData() {
