@@ -188,10 +188,7 @@
     const bc = new BroadcastChannel('wwcd_channel');
     const killsBC = new BroadcastChannel('kills_channel');
     const matchRankingBC = new BroadcastChannel('match_ranking_channel');
-    matchRankingBC.onmessage = (event) => { /* update display */ };
-
     const matchScrollBC = new BroadcastChannel('match_scroll_channel');
-    matchScrollBC.onmessage = (event) => { /* scroll bracket-wrapper */ };
 
     function sendWWCD() {
       const game = wwcdDropdown.value;
@@ -248,18 +245,10 @@
     }
 
     document.getElementById('scrollUpButton').addEventListener('click', () => {
-      fetch('/api/control', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'scroll_up' })
-      });
+      matchScrollBC.postMessage({ direction: 'up' });
     });
     document.getElementById('scrollDownButton').addEventListener('click', () => {
-      fetch('/api/control', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'scroll_down' })
-      });
+      matchScrollBC.postMessage({ direction: 'down' });
     });
   </script>
 </body>

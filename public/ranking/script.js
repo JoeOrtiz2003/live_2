@@ -37,24 +37,24 @@ function animateColumns(direction) {
   const animateOrder = direction === "hide" ? [...all].reverse() : all;
 
   animateOrder.forEach((el, i) => {
-    el.classList.remove('slide-left', 'slide-right');
+    el.classList.remove('stagger-animate-in', 'stagger-animate-out');
     el.style.animationDelay = "0ms";
 
     setTimeout(() => {
       if (direction === "show") {
         el.style.visibility = "visible";
-        el.classList.add('slide-left');
+        el.classList.add('stagger-animate-in');
         el.addEventListener('animationend', function handler() {
-          el.classList.remove('slide-left');
+          el.classList.remove('stagger-animate-in');
           el.style.opacity = 1;
           el.style.animationDelay = "0ms";
           el.removeEventListener('animationend', handler);
         });
       } else {
         el.style.visibility = "visible";
-        el.classList.add('slide-right');
+        el.classList.add('stagger-animate-out');
         el.addEventListener('animationend', function handler() {
-          el.classList.remove('slide-right');
+          el.classList.remove('stagger-animate-out');
           el.style.opacity = 0;
           el.style.visibility = "hidden";
           el.style.animationDelay = "0ms";

@@ -37,9 +37,6 @@ app.post('/api/control', (req, res) => {
     matchRankingGame = game;
     controlState = { action, game, timestamp: Date.now() };
     res.json({ success: true });
-  } else if (action === "scroll_up" || action === "scroll_down") {
-    controlState = { action, timestamp: Date.now() };
-    res.json({ success: true });
   } else {
     res.status(400).json({ error: "Invalid action" });
   }
@@ -87,4 +84,3 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
 });
-
