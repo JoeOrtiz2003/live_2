@@ -159,3 +159,16 @@ function animateColumns(direction) {
     }, i * 80); // 80ms stagger, adjust as needed
   });
 }
+
+let lastAction = null;
+setInterval(() => {
+  fetch('/api/control')
+    .then(res => res.json())
+    .then(command => {
+      if (command.action !== lastAction) {
+        if (command.action === "show2") animateColumns('show');
+        if (command.action === "hide2") animateColumns('hide');
+        lastAction = command.action;
+      }
+    });
+}, 1000);
