@@ -37,6 +37,9 @@ app.post('/api/control', (req, res) => {
     matchRankingGame = game;
     controlState = { action, game, timestamp: Date.now() };
     res.json({ success: true });
+  } else if (action === "scroll_up" || action === "scroll_down") {
+    controlState = { action, timestamp: Date.now() };
+    res.json({ success: true });
   } else {
     res.status(400).json({ error: "Invalid action" });
   }
@@ -85,53 +88,3 @@ app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
 });
 
-// Listen for match ranking changes
-const matchRankingBC = new BroadcastChannel('match_ranking_channel');
-matchRankingBC.onmessage = (event) => {
-  if (event.data && event.data.game) {
-    sheetName = event.data.game;
-    updateSlogan();
-    fetchSheetData();
-  }
-};
-
-// Listen for scroll commands
-const matchScrollBC = new BroadcastChannel('match_scroll_channel');
-matchScrollBC.onmessage = (event) => {
-  const wrapper = document.querySelector('.bracket-wrapper');
-  if (!wrapper) return;
-  if (event.data.direction === 'up') {
-    wrapper.scrollBy({ top: -550, behavior: 'smooth' });
-  } else if (event.data.direction === 'down') {
-    wrapper.scrollBy({ top: 550, behavior: 'smooth' });
-  }
-};
-
-let lastGame = null;
-let lastScroll = null;
-
-setInterval(() => {
-  fetch('/api/control')
-    .then(res => res.json())
-    .then(data => {
-      // Update game if changed
-      if (data.matchRankingGame && data.matchRankingGame !== lastGame) {
-        sheetName = data.matchRankingGame;
-        updateSlogan();
-        fetchSheetData();
-        lastGame = data.matchRankingGame;
-      }
-      // Handle scroll commands
-      if (data.action === 'scroll_up' && lastScroll !== 'up') {
-        const wrapper = document.querySelector('.bracket-wrapper');
-        wrapper?.scrollBy({ top: -550, behavior: 'smooth' });
-        lastScroll = 'up';
-      } else if (data.action === 'scroll_down' && lastScroll !== 'down') {
-        const wrapper = document.querySelector('.bracket-wrapper');
-        wrapper?.scrollBy({ top: 550, behavior: 'smooth' });
-        lastScroll = 'down';
-      } else if (data.action !== 'scroll_up' && data.action !== 'scroll_down') {
-        lastScroll = null;
-      }
-    });
-}, 1000);
