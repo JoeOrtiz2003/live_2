@@ -61,7 +61,7 @@ function fetchSheetData() {
       const wrapper = document.querySelector('.bracket-wrapper');
       wrapper.innerHTML = '';
 
-      sortedRows.slice(1, 18).forEach((row, index) => {
+      sortedRows.slice(1, 19).forEach((row, index) => {
         const teamName = getCellValue(row, 0);
         const place = getCellValue(row, 1);
         const kills = getCellValue(row, 2);

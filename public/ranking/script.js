@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const mainDiv = document.getElementById("mainDiv");
   mainDiv.style.display = "flex";
 
-  createRankingElements(18);
+  createRankingElements(19);
   fetchRankingData();
   setInterval(fetchRankingData, 1000);
 });
@@ -14,7 +14,7 @@ const sheetURL = `https://docs.google.com/spreadsheets/d/${sheetID}/gviz/tq?tqx=
 
 let previousRanks = {};
 
-function createRankingElements(count = 18) {
+function createRankingElements(count = 19) {
   const wrapper = document.getElementById("rankingElementsWrapper");
   wrapper.innerHTML = "";
 
@@ -70,6 +70,7 @@ async function fetchRankingData() {
 
 function updateRankingElements(data) {
   const newRanks = {};
+
   data.forEach((team, index) => {
     newRanks[team.team] = index;
   });
@@ -80,16 +81,10 @@ function updateRankingElements(data) {
 
     const prevIndex = previousRanks[teamData.team];
 
-    // Slide left if team moved up, right if moved down
     if (prevIndex !== undefined && index < prevIndex) {
-      element.classList.add("slide-left");
+      element.classList.add("slide-up");
       element.addEventListener("animationend", () => {
-        element.classList.remove("slide-left");
-      }, { once: true });
-    } else if (prevIndex !== undefined && index > prevIndex) {
-      element.classList.add("slide-right");
-      element.addEventListener("animationend", () => {
-        element.classList.remove("slide-right");
+        element.classList.remove("slide-up");
       }, { once: true });
     }
 
@@ -112,4 +107,55 @@ function updateRankingElements(data) {
   });
 
   previousRanks = { ...newRanks };
+}
+
+function animateColumns(direction) {
+  const header = document.querySelector('.rankingHeader');
+  const rows = Array.from(document.querySelectorAll('.rankingElement'));
+  const lower = document.querySelector('.lowerHeader');
+  const all = [header, ...rows, lower].filter(Boolean);
+  const mainDiv = document.getElementById("mainDiv");
+
+  // For "show", hide all before animating in
+  if (direction === "show") {
+    all.forEach(el => {
+      el.style.opacity = 0;
+      el.style.visibility = "hidden";
+    });
+    mainDiv.style.height = "";
+    mainDiv.style.overflow = "";
+  }
+
+  all.forEach((el, i) => {
+    el.classList.remove('slide-left', 'slide-right');
+    el.style.animationDelay = "0ms";
+
+    setTimeout(() => {
+      if (direction === "show") {
+        el.style.visibility = "visible";
+        el.classList.add('slide-left');
+        el.addEventListener('animationend', function handler() {
+          el.classList.remove('slide-left');
+          el.style.opacity = 1;
+          el.style.animationDelay = "0ms";
+          el.removeEventListener('animationend', handler);
+        });
+      } else {
+        el.style.visibility = "visible";
+        el.classList.add('slide-right');
+        el.addEventListener('animationend', function handler() {
+          el.classList.remove('slide-right');
+          el.style.opacity = 0;
+          el.style.visibility = "hidden";
+          el.style.animationDelay = "0ms";
+          el.removeEventListener('animationend', handler);
+          // Hide mainDiv after last element
+          if (i === all.length - 1) {
+            mainDiv.style.height = "0";
+            mainDiv.style.overflow = "hidden";
+          }
+        });
+      }
+    }, i * 80); // 80ms stagger, adjust as needed
+  });
 }
