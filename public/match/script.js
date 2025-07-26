@@ -4,7 +4,7 @@ const query = 'SELECT V, Y, Z, AA, X, AH, W WHERE U IS NOT NULL ORDER BY AH DESC
 
 google.charts.load('current', { packages: ['corechart'] });
 google.charts.setOnLoadCallback(() => {
-  createRankingElements(18);
+  createRankingElements(19);
   updateSlogan(); // Set slogan on load
   fetchSheetData();
   setInterval(() => {
@@ -83,11 +83,11 @@ function fetchSheetData() {
     })
     .catch(err => {
       console.error('Sheet fetch error:', err.message);
-      createRankingElements(18);
+      createRankingElements(19);
     });
 }
 
-function createRankingElements(count = 18) {
+function createRankingElements(count = 19) {
   const wrapper = document.querySelector('.bracket-wrapper');
   wrapper.innerHTML = '';
 

@@ -70,7 +70,6 @@ async function fetchRankingData() {
 
 function updateRankingElements(data) {
   const newRanks = {};
-
   data.forEach((team, index) => {
     newRanks[team.team] = index;
   });
@@ -81,10 +80,16 @@ function updateRankingElements(data) {
 
     const prevIndex = previousRanks[teamData.team];
 
+    // Slide left if team moved up, right if moved down
     if (prevIndex !== undefined && index < prevIndex) {
-      element.classList.add("slide-up");
+      element.classList.add("slide-left");
       element.addEventListener("animationend", () => {
-        element.classList.remove("slide-up");
+        element.classList.remove("slide-left");
+      }, { once: true });
+    } else if (prevIndex !== undefined && index > prevIndex) {
+      element.classList.add("slide-right");
+      element.addEventListener("animationend", () => {
+        element.classList.remove("slide-right");
       }, { once: true });
     }
 

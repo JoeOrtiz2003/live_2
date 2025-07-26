@@ -230,6 +230,38 @@ body {
   will-change: transform, opacity;
 }
 
+/* Add these to your ranking/style.css for left/right transitions */
+@keyframes slideLeft {
+  0% {
+    transform: translateX(40px);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideRight {
+  0% {
+    transform: translateX(-40px);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.slide-left {
+  animation: slideLeft 0.5s cubic-bezier(0.4,0,0.2,1);
+  will-change: transform, opacity;
+}
+
+.slide-right {
+  animation: slideRight 0.5s cubic-bezier(0.4,0,0.2,1);
+  will-change: transform, opacity;
+}
 
 *,
 ::before,

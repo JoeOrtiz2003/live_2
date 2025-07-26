@@ -72,7 +72,7 @@ app.get('/WWCD', (req, res) => {
 
 // Serve ranking2.html at /Ranking2
 app.get('/Ranking2', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'ranking2.html'));
+  res.sendFile(path.join(__dirname, 'public', 'ranking.html'));
 });
 
 // Fallback: redirect to controller
